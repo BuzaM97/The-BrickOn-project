@@ -2,16 +2,32 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<!--define a block for the head section-->
 <head>
+    {% block head %}
+
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha256-/ykJw/wDxMa0AQhHDYfuMEwVb4JHMx9h4jD4XvHqVzU=" crossorigin="anonymous" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block styles %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css"  />
+    {% endblock %}
+
     <title>Main</title>
+    {% endblock %}
+
 </head>
 <body>
+<!-- define a block for the body section-->
+{% block content %}
 
-  <div class="input-group-append">
-    <a class="btn btn-outline-secondary" href="{{url_for('set')}}" role="button" >Keresés</a>
-  </div>
+            <div class="container px-3 px-lg-5 text-center">
+                <h1 class="mb-1">BrickOne árkereső</h1>
+                <h3 class="mb-5"><em>Találjon Lego sezzettet kedvezményes áron!</em></h3>
+<!--                getting the url for the 'set' route.-->
+    <a class="btn btn-outline-secondary " href="{{url_for('set')}}" role="button" >Keresés</a>
+            </div>
 
+{% endblock %}
 </body>
 </html>

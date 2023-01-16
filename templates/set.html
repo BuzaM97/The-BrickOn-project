@@ -1,24 +1,72 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
+<!-- define a block for the head section-->
 <head>
+        {% block head %}
+
     <meta charset="UTF-8">
+        {% block styles %}
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css"  />
+    {% endblock %}
+
     <title>Title</title>
+        {% endblock %}
+
 </head>
+<!-- define a block for the body section-->
+
 <body>
-<h1>Adja meg a széria számot</h1>
-<form action="/set" method="post">
-      <label for="set_num">Set num: </label>
-      <input id="set_num" placeholder="21241-1 / 077-1" name="set_num">
-      <input type="submit" value="Submit">
-</form>
-
 {% block content %}
-    {% if set==""%}
-    {% else %}
-<p>Erre a set-re gondoltál:</p>
+<div class="container text-justify">
+    <div>
 
-<p>{{ set }}</p>
+<h3>Adja meg a széria számot</h3>
+<form action="/set" method="post">
+      <input id="set_num" placeholder="21241-1 / 077-1" name="set_num">
+      <input class="btn btn-outline-secondary" type="submit" value="Keresés">
+</form>
+            </div>
+
+<div>
+<!--     check if the set_name variable is exists-->
+    {% if set_name  %}
+<!--    render the table with lego set information-->
+    <p>Erre a set-re gondoltál:</p>
+
+<table class="table" style="width: 500px; ">
+  <thead>
+    <tr>
+      <td ><h5>Erre a set-re gondoltál?</h5></td>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="2" ><img src= "{{image}}" style="width: 250px"></td>
+        <td style="width: 250px" ><h4>{{ set_name }}</h4>
+            <p>{{ set_num }}</p>
+        <p>{{ set_year }}</p>
+        </td>
+
+    </tr>
+    <tr>
+      <td><a class="btn btn-outline-secondary " href="{{ url_for('search_jofogas', set_num=set_num, set_name=set_name) }}" role="button" >Folytatás</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+    {% else %}
+
     {% endif %}
 {% endblock content %}
+    </div>
+    </div>
+
+
 </body>
 </html>
