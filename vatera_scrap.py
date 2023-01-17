@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-import json
-import brickable
+
+import ad_class
 
 def get_set_jofogas(set_num, set_name):
     # Correcting set num to be less long and too accurate
@@ -29,6 +29,13 @@ def get_set_jofogas(set_num, set_name):
     # Get the AD's subject from the website
     data_subject_tag = data.find("a", {"class": "subject"})
     data_subject = data_subject_tag.text
+
+#   Declare the website in the data_webiste variable
+    data_website= "jofogas"
+
+    return ad_class.AdObject(data_website, data_url,data_subject, price_value )
+
+
 
 
 

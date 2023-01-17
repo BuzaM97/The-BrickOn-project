@@ -28,8 +28,8 @@ def set():
 def search_jofogas():
     set_name = request.args.get('set_name')
     set_num = request.args.get('set_num')
-    vatera_scrap.get_set_jofogas(set_num, set_name)
-
+    Jofogas_AD = vatera_scrap.get_set_jofogas(set_num, set_name)
+    print(Jofogas_AD.price)
     return render_template("set.html")
 
 
