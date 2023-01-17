@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap5
 import brickable
 import vatera_scrap
@@ -28,7 +28,7 @@ def set():
 def search_jofogas():
     set_name = request.args.get('set_name')
     set_num = request.args.get('set_num')
-    vatera_scrap.get_set_jofogas(set_num,set_name)
+    vatera_scrap.get_set_jofogas(set_num, set_name)
 
     return render_template("set.html")
 
