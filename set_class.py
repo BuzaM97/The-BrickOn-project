@@ -7,9 +7,7 @@ class SetObject:
         self.name = lego_set['name'] # Set Name
         self.year = lego_set['year'] # Set year
         self.set_img_url = lego_set['set_img_url']  # Set Image url
-        self.ad_price = "n/d"
-        self.ad_link = "n/d"
-        self.website = "n/d"
-    # def add_ad_data():
+
+
 
 

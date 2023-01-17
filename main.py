@@ -1,15 +1,12 @@
-# import the required modules
 from flask import Flask, render_template, request, url_for
-from flask_bootstrap import Bootstrap
 from flask_bootstrap import Bootstrap5
-
 import brickable
-import set_class
-import jinja2
 import vatera_scrap
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 bootstrap = Bootstrap5(app)
+
+# It's contains the object that we get back from brickable api ([0]), and the AD's objects from Vatera, Jofogas etc..
 
 
 # route that returns the "index.html" template.
@@ -32,6 +29,7 @@ def search_jofogas():
     set_name = request.args.get('set_name')
     set_num = request.args.get('set_num')
     vatera_scrap.get_set_jofogas(set_num,set_name)
+
     return render_template("set.html")
 
 

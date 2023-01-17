@@ -13,6 +13,7 @@ def find_set(set_num):
     # making a GET request to the rebrickable api and passing the set_num and API key
     response = requests.get(f"https://rebrickable.com/api/v3/lego/sets/{set_num}/?key={ApiKey}")
     lego_set = response.text # get the response as text
+    print(lego_set)
     # creating a SetObject  and passing the json data to the constructor
     set_object= set_class.SetObject(json.loads(lego_set))
     return set_object
