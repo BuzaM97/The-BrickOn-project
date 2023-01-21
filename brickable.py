@@ -4,12 +4,14 @@ import requests
 import set_class
 import os
 
-ApiKey= (os.environ['BRICKABLE_API_KEY'])
+ApiKey= (os.environ['BCA_API_KEY'])
+
 
 
 # Communicate with rebrickable api to get the current lego database
 
 def find_set(set_num):
+
     # making a GET request to the rebrickable api and passing the set_num and API key
     response = requests.get(f"https://rebrickable.com/api/v3/lego/sets/{set_num}/?key={ApiKey}")
     lego_set = response.text # get the response as text
