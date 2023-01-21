@@ -2,9 +2,9 @@ import json
 import requests
 # a module used for creating objects for lego sets.
 import set_class
+import os
 
-
-ApiKey= "a8051c7afd62c5ed715c48fe45f58ec5"
+ApiKey= (os.environ['BRICKABLE_API_KEY'])
 
 
 # Communicate with rebrickable api to get the current lego database

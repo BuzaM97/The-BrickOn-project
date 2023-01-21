@@ -28,8 +28,10 @@ def set():
 def search_jofogas():
     set_name = request.args.get('set_name')
     set_num = request.args.get('set_num')
-    Jofogas_AD = vatera_scrap.get_set_jofogas(set_num, set_name)
-    print(Jofogas_AD.price)
+    # Jofogas_AD = vatera_scrap.get_set_jofogas(set_num, set_name)
+    # Vatera_AD = vatera_scrap.get_set_vatera(set_num, set_name)
+    # Arukereso_AD = vatera_scrap.get_set_arukereso(set_num,set_name)
+    vatera_scrap.get_set_amazon(set_num,set_name)
     return render_template("set.html")
 
 
