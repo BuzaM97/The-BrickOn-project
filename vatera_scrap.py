@@ -117,20 +117,18 @@ def get_set_amazon(set_num, set_name):
     title = soup.find('span', {'class': "a-size-base-plus"}).text.strip()
     # # Get the AD's url from the website
     data_url_tag = soup.find('a', {'class': "a-link-normal"})
-    data_url = data_url_tag.get("href")
-    print("www.amazon.com"+data_url)
+    data_url_href = data_url_tag.get("href")
+    data_url=f"www.amazon.com{data_url_href}"
 
     # Get the AD's price from the website
     price_value_whole = soup.find('span', {'class': "a-price-whole"}).text.strip()
     price_value_fract = soup.find('span', {'class': "a-price-fraction"}).text.strip()
-    data_price= str(f"{price_value_whole}{price_value_fract}")
-    print(data_price)
+    price_value= str(f"{price_value_whole}{price_value_fract}")
     #
     # Get the AD's subject from the website
     data_subject = soup.find('span', {'class': "a-size-base-plus"}).text.strip()
-    print(data_subject)
     #
     # # Declare the website in the data_webiste variable
-    # data_website= "arukereso"
-    # return ad_class.AdObject(data_website, data_url,data_subject, price_value )
+    data_website= "Amazon"
+    return ad_class.AdObject(data_website, data_url,data_subject, price_value )
     #

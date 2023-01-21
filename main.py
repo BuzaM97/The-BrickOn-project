@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap5
 import brickable
 import vatera_scrap
+import ebay_api
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 bootstrap = Bootstrap5(app)
@@ -31,7 +32,9 @@ def search_jofogas():
     # Jofogas_AD = vatera_scrap.get_set_jofogas(set_num, set_name)
     # Vatera_AD = vatera_scrap.get_set_vatera(set_num, set_name)
     # Arukereso_AD = vatera_scrap.get_set_arukereso(set_num,set_name)
-    vatera_scrap.get_set_amazon(set_num,set_name)
+    # Amazon_AD=vatera_scrap.get_set_amazon(set_num,set_name)
+    Ebay_AD=ebay_api.get_set_ebay(set_num)
+    print(Ebay_AD.price)
     return render_template("set.html")
 
 
