@@ -18,7 +18,6 @@ def get_set_jofogas(set_num, set_name):
     response = requests.get(f'https://www.jofogas.hu/magyarorszag?q=lego {corrected_set_num[0]} bontatlan&sp=1&o=1')
     # parse the HTML content
     soup = BeautifulSoup(response.content, 'html.parser')
-
     # extract the data
     data = soup.find(class_="contentArea")
 

@@ -29,7 +29,12 @@
       <input id="set_num" placeholder="21241-1 / 077-1" name="set_num">
       <input class="btn btn-outline-secondary" type="submit" value="Keresés">
 </form>
-            </div>
+        {% if error %}
+        <div class="alert alert-danger" style="width : 20.3%" role="alert">
+  {{ error }}
+    </div>
+        {% endif %}
+    </div>
 
 <div>
 <!--     check if the set_name variable is exists-->
