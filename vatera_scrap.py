@@ -119,19 +119,19 @@ def get_set_amazon(set_num, set_name):
 
 
     # make a GET request to the Vatera website
-    "https://www.amazon.com/s?k=Lego+{corrected_set_num[0]}"
     response = requests.get(f'https://www.amazon.de/s?k=Lego+{corrected_set_num[0]}&ref=sr_pg_1', headers=HEADERS)
     # parse the HTML content
     soup = BeautifulSoup(response.content, 'html.parser')
-
     # extract the data
-    data = soup.find(class_="s-widget-container")
+    data = soup.find(class_="a-section a-spacing-base")
+    print(data)
     title = soup.find('span', {'class': "a-size-base-plus"}).text.strip()
-
-    # # Get the AD's url from the website
-    data_url_tag = soup.find('a', {'class': "a-link-normal"})
+    # Get the AD's url from the website
+    data_url_tag = data.find('a', {'class': "a-link-normal"})
     data_url_href = data_url_tag.get("href")
-    data_url=f"www.amazon.com{data_url_href}"
+
+
+    data_url=f"https://www.amazon.de/{data_url_href}"
 
     # Get the AD's price from the website
     price_value = soup.find('span', {'class': "a-price-whole"}).text.strip()
