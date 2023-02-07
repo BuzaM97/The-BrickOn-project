@@ -40,7 +40,7 @@ def search_jofogas():
     set_name = request.args.get('set_name')
     set_num = request.args.get('set_num')
     top_results=[]
-    # Cath error if no item was found9
+    # Cath error if no item was found
     try:
         Jofogas_AD = vatera_scrap.get_set_jofogas(set_num, set_name)
     except AttributeError:
@@ -76,13 +76,12 @@ def search_jofogas():
     top_results.append(Ebay_AD)
     if top_results :
 
-    # Vatera_AD,
-    # Arukereso_AD,
-    # Amazon_AD,
-    # Ebay_AD,
+
         return render_template("results.html", top_results=top_results)
     else:
-        print("None")
+        # If there is no result on the sites, show error on set.html
+        error= "Sajnáljuk, a megadott LEGO egyik keresési oldalon sem található"
+        return render_template("set.html", error=error)
 
 @app.route('/results', methods=['GET', 'POST'])
 def results():
