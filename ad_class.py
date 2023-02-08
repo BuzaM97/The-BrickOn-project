@@ -5,6 +5,6 @@ class AdObject:
         self.site = site
         self.url = url
         self.subject = subject
-        self.price = price
+        self.price = float(price)
         self.site_logo= logo
 

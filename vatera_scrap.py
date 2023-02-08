@@ -99,7 +99,8 @@ def get_set_arukereso(set_num, set_name):
 
     # Get the AD's price from the website
     price_value_tag = soup.find("a", {"class": "price"})
-    price_value = price_value_tag.text
+    price= price_value_tag.text
+    price_value=price.split(" ")[0]
 
     # Get the AD's subject from the website
     data_subject = data.find('img')['alt']
@@ -124,7 +125,6 @@ def get_set_amazon(set_num, set_name):
     soup = BeautifulSoup(response.content, 'html.parser')
     # extract the data
     data = soup.find(class_="a-section a-spacing-base")
-    print(data)
     title = soup.find('span', {'class': "a-size-base-plus"}).text.strip()
     # Get the AD's url from the website
     data_url_tag = data.find('a', {'class': "a-link-normal"})

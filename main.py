@@ -74,6 +74,9 @@ def search_jofogas():
 
     Ebay_AD = ebay_api.get_set_ebay(set_num)
     top_results.append(Ebay_AD)
+
+    top_results = sorted(top_results, key=lambda x: x.price)
+
     if top_results :
 
 
