@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-
+import exchange_rates
 import ad_class
 HEADERS = {
     'User-Agent': ('Mozilla/5.0 (X11; Linux x86_64)'
@@ -134,8 +134,8 @@ def get_set_amazon(set_num, set_name):
     data_url=f"https://www.amazon.de/{data_url_href}"
 
     # Get the AD's price from the website
-    price_value = soup.find('span', {'class': "a-price-whole"}).text.strip()
-
+    price_value_eur = soup.find('span', {'class': "a-price-whole"}).text.strip()
+    price_value = exchange_rates.change_currency(float(price_value_eur), "EUR")
 
     # Get the AD's subject from the website
     data_subject = soup.find('span', {'class': "a-size-base-plus"}).text.strip()
