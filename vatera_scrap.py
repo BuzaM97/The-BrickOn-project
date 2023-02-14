@@ -145,5 +145,11 @@ def get_set_amazon(set_num, set_name):
     data_website= "Amazon"
 
     logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqu8nsOXBapqDEySzTkg1UFncYxh-JSgCegA&usqp=CAU"
-    return ad_class.AdObject(data_website, data_url,data_subject, price_value, logo )
+    # Check if the searched set's name is in the AD's subject
+    if corrected_set_name in data_subject:
+        return ad_class.AdObject(data_website, data_url, data_subject, price_value, logo)
+    # If the searched set's name is not in the AD's subject return none
+    elif corrected_set_name not in data_subject:
+        return None
+
     #

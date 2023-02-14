@@ -67,10 +67,15 @@ def search_jofogas():
 
     try:
         Amazon_AD=vatera_scrap.get_set_amazon(set_num,set_name)
+
     except AttributeError:
         pass
     else:
-        top_results.append(Amazon_AD)
+        # If vatera_srcap found a AD but not the searched set it pass
+        if Amazon_AD == None:
+            pass
+        else:
+            top_results.append(Amazon_AD)
 
     Ebay_AD = ebay_api.get_set_ebay(set_num)
     top_results.append(Ebay_AD)
