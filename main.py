@@ -46,7 +46,10 @@ def search_jofogas():
     except AttributeError:
         pass
     else:
-        top_results.append(Jofogas_AD)
+        if Jofogas_AD == None:
+            pass
+        else:
+            top_results.append(Jofogas_AD)
 
 
     try:
@@ -54,7 +57,10 @@ def search_jofogas():
     except AttributeError:
         pass
     else:
-        top_results.append(Vatera_AD)
+        if Vatera_AD == None:
+            pass
+        else:
+            top_results.append(Vatera_AD)
 
 
     try:
