@@ -46,21 +46,13 @@ def search_jofogas():
     except AttributeError:
         pass
     else:
-        if Jofogas_AD == None:
-            pass
-        else:
-            top_results.append(Jofogas_AD)
+        top_results.append(Jofogas_AD)
 
 
-    try:
-        Vatera_AD = vatera_scrap.get_set_vatera(set_num, set_name)
-    except AttributeError:
-        pass
-    else:
-        if Vatera_AD == None:
-            pass
-        else:
-            top_results.append(Vatera_AD)
+
+    Vatera_AD = vatera_scrap.get_set_vatera(set_num, set_name)
+
+    top_results.append(Vatera_AD)
 
 
     try:
