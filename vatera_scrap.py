@@ -75,10 +75,8 @@ def get_set_vatera(set_num, set_name):
     for top in all_result:
         data=top
         if 'lepin' in data.text or 'Lepin' in data.text or 'LEPIN' in data.text:
-            print("Fake")
             pass
         elif 'lepin' not in data.text:
-            print("found")
             break
     # Get the AD's url from the website
     data_url_tag = data.find("a", {"product_link": ""})
@@ -144,16 +142,29 @@ def get_set_amazon(set_num, set_name):
     # Correcting set num to be less long and too accurate
     corrected_set_num = set_num.split("-")
     corrected_set_name = set_name[:10]
-
+    print(corrected_set_num[0])
 
     # make a GET request to the Vatera website
     response = requests.get(f'https://www.amazon.de/s?k=Lego+{corrected_set_num[0]}&ref=sr_pg_1', headers=HEADERS)
     # parse the HTML content
     soup = BeautifulSoup(response.content, 'html.parser')
     # extract the data
-    data = soup.find(class_="a-section a-spacing-base")
+    data = 0
     title = soup.find('span', {'class': "a-size-base-plus"}).text.strip()
-    # Get the AD's url from the website
+    # Creating a list of all the found Ad
+    all_result = []
+    for ad in soup.find_all(class_="a-section a-spacing-base"):
+         all_result.append(ad)
+    # Filter out the items that only include Lighting Set for the LEGO set
+    for top in all_result:
+        data=top
+        # If the ad subject dose not have the set num in it it skip
+        if corrected_set_num[0] in data.text and "Lighting Set for" not in data.text:
+            break
+        else:
+            pass
+
+
     data_url_tag = data.find('a', {'class': "a-link-normal"})
     data_url_href = data_url_tag.get("href")
 
@@ -161,23 +172,19 @@ def get_set_amazon(set_num, set_name):
     data_url=f"https://www.amazon.de/{data_url_href}"
 
     # Get the AD's price from the website
-    price_value_eur = soup.find('span', {'class': "a-price-whole"}).text.strip()
+    price_value_eur = data.find('span', {'class': "a-price-whole"}).text.strip()
 
     price_value = exchange_rates.change_currency(float(price_value_eur.replace(",","")), "EUR")
 
     # Get the AD's subject from the website
-    data_subject = soup.find('span', {'class': "a-size-base-plus"}).text.strip()
+    data_subject = data.find('span', {'class': "a-size-base-plus"}).text.strip()
 
 
     # Declare the website in the data_webiste variable
     data_website= "Amazon"
 
     logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqu8nsOXBapqDEySzTkg1UFncYxh-JSgCegA&usqp=CAU"
-    # Check if the searched set's name is in the AD's subject
-    if corrected_set_name in data_subject:
-        return ad_class.AdObject(data_website, data_url, data_subject, price_value, logo)
-    # If the searched set's name is not in the AD's subject return none
-    elif corrected_set_name not in data_subject:
-        return None
+    return ad_class.AdObject(data_website, data_url, data_subject, price_value, logo)
+
 
     #
