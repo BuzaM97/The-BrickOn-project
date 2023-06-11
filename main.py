@@ -31,8 +31,17 @@ def set():
                                    set_name=set_object.name,
                                    set_year=set_object.year,
                                    image=set_object.set_img_url)
+
+    #all_set= brickable.find_all_set()
     # If the request method is GET, it returns the "set.html" template
-    return render_template("set.html")
+    #with open('items.txt') as f:
+     #   all_set = f.readlines()
+    #print (type(all_set))
+
+    all_set = ['078-1', '102A-1', '102A-2', '104-1', '126-1', '157-3', '1-8', '2-8', '311-5', '312-1', '338-1', '345-3', '346-1', '347-1', '348-2', '3-6', '367-2', '4-4', '445A-1', '512-1']
+
+
+    return render_template("set.html" , all_set=all_set )
 
 
 @app.route('/search_jofogas', methods=['GET', 'POST'])
@@ -49,10 +58,13 @@ def search_jofogas():
         top_results.append(Jofogas_AD)
 
 
+    try:
 
-    Vatera_AD = vatera_scrap.get_set_vatera(set_num, set_name)
-
-    top_results.append(Vatera_AD)
+        Vatera_AD = vatera_scrap.get_set_vatera(set_num, set_name)
+    except AttributeError:
+        pass
+    else:
+        top_results.append(Vatera_AD)
 
 
     try:
@@ -61,7 +73,6 @@ def search_jofogas():
         pass
     else:
         top_results.append(Arukereso_AD)
-
 
     try:
         Amazon_AD=vatera_scrap.get_set_amazon(set_num,set_name)
@@ -79,7 +90,6 @@ def search_jofogas():
     top_results.append(Ebay_AD)
 
     top_results = sorted(top_results, key=lambda x: x.price)
-
     if top_results :
 
 
