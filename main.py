@@ -3,17 +3,23 @@ from flask_bootstrap import Bootstrap5
 import brickable
 import ebay_api
 import vatera_scrap
-
+import sqlite
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 bootstrap = Bootstrap5(app)
 
 
 # route that returns the "index.html" template.
+"""
 @app.route('/')
 def main():
     return render_template("index.html")
-
+"""
+@app.route('/' , methods=['GET', 'POST'])
+def main1():
+    randomsets = sqlite.getrandomsets()
+    print(randomsets)
+    return render_template("index1.html", randomsets = randomsets)
 
 @app.route('/set', methods=['GET', 'POST'])
 def set():
@@ -38,16 +44,17 @@ def set():
      #   all_set = f.readlines()
     #print (type(all_set))
 
-    all_set = ['078-1', '102A-1', '102A-2', '104-1', '126-1', '157-3', '1-8', '2-8', '311-5', '312-1', '338-1', '345-3', '346-1', '347-1', '348-2', '3-6', '367-2', '4-4', '445A-1', '512-1']
 
 
-    return render_template("set.html" , all_set=all_set )
+    return render_template("set.html"  )
 
 
 @app.route('/search_jofogas', methods=['GET', 'POST'])
 def search_jofogas():
     set_name = request.args.get('set_name')
     set_num = request.args.get('set_num')
+    loadedsets = request.args.get('loadedsets')
+    print(type(loadedsets))
     top_results=[]
     # Cath error if no item was found
     try:
@@ -85,9 +92,12 @@ def search_jofogas():
             pass
         else:
             top_results.append(Amazon_AD)
+    try :
+        Ebay_AD = ebay_api.get_set_ebay(set_num)
+        top_results.append(Ebay_AD)
 
-    Ebay_AD = ebay_api.get_set_ebay(set_num)
-    top_results.append(Ebay_AD)
+    except KeyError:
+        pass
 
     top_results = sorted(top_results, key=lambda x: x.price)
     if top_results :
@@ -97,7 +107,7 @@ def search_jofogas():
     else:
         # If there is no result on the sites, show error on set.html
         error= "Sajnáljuk, a megadott LEGO egyik keresési oldalon sem található"
-        return render_template("set.html", error=error)
+        return render_template("index1.html", error=error, randomsets = loadedsets)
 
 @app.route('/results', methods=['GET', 'POST'])
 def results():

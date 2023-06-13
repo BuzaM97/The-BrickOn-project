@@ -147,8 +147,6 @@ def get_set_amazon(set_num, set_name):
     # Correcting set num to be less long and too accurate
     corrected_set_num = set_num.split("-")
     corrected_set_name = set_name[:10]
-    print(corrected_set_num[0])
-
     # make a GET request to the Vatera website
     response = requests.get(f'https://www.amazon.de/s?k=Lego+{corrected_set_num[0]}&ref=sr_pg_1', headers=HEADERS)
     # parse the HTML content
@@ -163,12 +161,12 @@ def get_set_amazon(set_num, set_name):
     # Filter out the items that only include Lighting Set for the LEGO set
     for top in all_result:
         data=top
-        # If the ad subject dose not have the set num in it it skip
-        if corrected_set_num[0] in data.text and "Lighting Set for" not in data.text:
-            break
-        else:
-            pass
 
+        # If the ad subject dose not have the set num in it it skip
+        if corrected_set_num[0] in data.text\
+                and "Lighting Set for" not in data.text:
+            print("1")
+            break
 
     data_url_tag = data.find('a', {'class': "a-link-normal"})
     data_url_href = data_url_tag.get("href")
@@ -183,7 +181,6 @@ def get_set_amazon(set_num, set_name):
 
     # Get the AD's subject from the website
     data_subject = data.find('span', {'class': "a-size-base-plus"}).text.strip()
-
 
     # Declare the website in the data_webiste variable
     data_website= "Amazon"

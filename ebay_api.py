@@ -26,6 +26,7 @@ def get_set_ebay(set_num):
                                                  'itemFilter': [{'name': 'Condition', 'value': 'New'} ]})
 
     # Extracting the information about the first item from the response
+
     item_dict = response.dict()["searchResult"]["item"][0]
 
     # Setting the values for the data website, data URL, data subject, and price value
