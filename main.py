@@ -25,19 +25,19 @@ def main1():
 def set():
     # The function gets the set number from the form, finds the set from the lego.com website and returns the set.html
     if request.method == 'POST':
-        set_num = request.form.get('set_num')
-        try:
-            set_object = brickable.find_set(set_num)
-        except KeyError:
-            error = 'Nincs találat'
-            return render_template("set.html", error=error)
-
+        set_data = request.form.get('set_num')
+        set_object = sqlite.getselectedsets(set_data)
+        if set_object == "No result":
+            error = 'Sajnáluk, a keresési értékre nincs találat a Lego adatbázisban, kérjük ellenőrizze a bevitt adatokat'
+            return render_template("index1.html", error=error)
+        else:
+            return render_template("index1.html", randomsets = set_object)
+"""
         else:
             return render_template("set.html", set_num=set_num,
                                    set_name=set_object.name,
                                    set_year=set_object.year,
                                    image=set_object.set_img_url)
-
     #all_set= brickable.find_all_set()
     # If the request method is GET, it returns the "set.html" template
     #with open('items.txt') as f:
@@ -47,6 +47,7 @@ def set():
 
 
     return render_template("set.html"  )
+"""
 
 
 @app.route('/search_jofogas', methods=['GET', 'POST'])
